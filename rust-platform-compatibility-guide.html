@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="A practical guide to running Rust applications on Windows, macOS, Linux, and other platforms, including legacy compatibility and multi-platform distribution." name="description"/>
+  <title>
+   Where Can Rust Applications Run? | Platform Compatibility Guide
+  </title>
+  <style>
+   :root{color-scheme:dark;--bg:#0c1220;--panel:#141d2d;--panel2:#1b283c;--ink:#ecf2fb;--muted:#a6b5c8;--line:#304258;--accent:#fa9b55;--blue:#6bd3ee;--green:#91d7b0;--amber:#f0c37f;--radius:16px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue)}a:hover{color:#b0edfa}.shell{max-width:1140px;margin:auto;padding:0 24px}.hero{background:radial-gradient(ellipse at 80% 20%,#273950 0,transparent 48%),linear-gradient(135deg,#141d2d,#0c1220);border-bottom:1px solid var(--line);padding:64px 0 50px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:.78rem;color:var(--accent)}h1{font-size:clamp(2.3rem,5vw,4.2rem);letter-spacing:-.045em;line-height:1.08;margin:12px 0 20px;max-width:850px}h2{font-size:clamp(1.5rem,2.7vw,2.15rem);line-height:1.22;letter-spacing:-.025em;margin:0 0 14px}h3{font-size:1.15rem;margin:0 0 8px}.lede{font-size:1.17rem;color:#ccd8e6;max-width:800px}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}.chip{border:1px solid #486078;background:#1b293b;color:#e4eff9;border-radius:100px;padding:5px 13px;font-size:.86rem}.topnav{background:#111a29;border-bottom:1px solid var(--line)}.topnav .shell{display:flex;flex-wrap:wrap;gap:18px;padding-top:12px;padding-bottom:12px}.topnav a{display:inline-flex;align-items:center;text-decoration:none;color:#c4d5e5;font-size:.88rem;font-weight:600;padding:8px 13px;margin:-4px -6px;border:1px solid transparent;border-radius:9px;transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease}.topnav a:hover{color:#fff0df;background:#4e3526;border-color:#c7824c;box-shadow:inset 0 -2px 0 var(--accent)}.topnav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px;background:#243d51;color:#fff}.topnav a:active{background:#70452b;color:#fff}@media(prefers-reduced-motion:reduce){.topnav a{transition:none}}main{padding-top:42px;padding-bottom:68px}section{margin-bottom:58px;scroll-margin-top:18px}.intro{font-size:1.07rem;max-width:920px;color:#c8d7e8}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:24px}.panel p:last-child{margin-bottom:0}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.stat{padding:21px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}.stat .big{font-size:1.75rem;font-weight:800;color:var(--accent);line-height:1.25}.stat p{margin:7px 0 0;color:var(--muted);font-size:.92rem}.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius)}table{width:100%;border-collapse:collapse;min-width:690px;background:var(--panel)}th,td{text-align:left;vertical-align:top;padding:14px 17px;border-bottom:1px solid #2a3c51}th{color:#dce9f5;background:#202c3e;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em}tr:last-child td{border-bottom:0}tbody tr:hover{background:#1a293b}.status{display:inline-block;border:1px solid;border-radius:30px;padding:1px 9px;font-size:.78rem;font-weight:700;white-space:nowrap}.yes{color:var(--green);border-color:#47745f;background:#183b30}.limited{color:var(--amber);border-color:#85673b;background:#40321e}.note{border-left:4px solid var(--accent);padding:13px 17px;background:#32271f;color:#f8dfcd;border-radius:0 10px 10px 0;margin:18px 0}.muted{color:var(--muted)}.small{font-size:.9rem}.code{display:inline-block;background:#0a101b;border:1px solid #33455d;border-radius:6px;padding:2px 7px;font: .9rem ui-monospace,SFMono-Regular,Consolas,monospace;color:#bee3fa;overflow-wrap:anywhere}.arch{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:28px;text-align:center}.core{max-width:520px;margin:auto;padding:22px;border-radius:12px;border:1px solid #ca844f;background:linear-gradient(130deg,#553622,#30251d)}.core h3{color:#ffbd8c}.core p{margin:0;color:#ffe1cf;font-size:.92rem}.connector{height:32px;width:2px;background:var(--blue);margin:auto;position:relative}.connector:after{content:"";position:absolute;bottom:0;left:-4px;border:5px solid transparent;border-top-color:var(--blue);transform:translateY(8px)}.osgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.osbox{border:1px solid #44617c;background:#1c3448;border-radius:12px;padding:20px 12px}.osbox strong{display:block;font-size:1.12rem}.osbox span{color:#c2d5e6;font-size:.86rem}.step{display:flex;gap:17px;padding:16px 0;border-bottom:1px solid var(--line)}.step:last-child{border:0}.num{flex:none;display:grid;place-items:center;background:#563927;color:#ffc9a4;border:1px solid #94623e;width:36px;height:36px;border-radius:10px;font-weight:800}.step p{margin:3px 0 0;color:#c4d3e4}.footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:.9rem}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:50px}section#fundamentals{margin-top:58px}.btn{appearance:none;border:1px solid #ad7044;background:#422d20;color:#ffe4d0;border-radius:9px;padding:10px 16px;font:inherit;cursor:pointer}.btn:hover{background:#5d3c29}.source-list{padding-left:20px}.source-list li{margin:8px 0}.kicker{font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-size:.79rem;margin-bottom:8px}@media(max-width:720px){.hero{padding:43px 0}.two,.three{grid-template-columns:1fr}.osgrid{grid-template-columns:1fr}.shell{padding:0 16px}main{padding-top:30px}.panel,.arch{padding:18px}}@media print{:root{color-scheme:light;--bg:white;--panel:#fff;--panel2:#fff;--ink:#111;--muted:#444;--line:#bbb;--blue:#07597d}.hero{background:#fff;padding:20px 0}.lede,.intro,.step p{color:#333}main{padding-top:18px}.topnav,.actions{display:none}.panel,.stat,.tablewrap,.arch{break-inside:avoid}section{break-inside:auto;margin-bottom:28px}table{background:white}th{background:#eee;color:#111}td{color:#111}.chip{color:#111;background:#eee}.code{color:#111;background:#eee}.osbox{color:#111;background:#eee}.osbox span{color:#333}.core{background:#f5e7da;color:#111}.core p,.core h3{color:#111}.note{background:#fff1e5;color:#111}.footer{color:#444}a{color:#07597d}}
+
+/* Readability refinements: larger text, higher contrast and clear navigation. */
+body { font-size: 17px; line-height: 1.75; }
+p, li, td { color: #edf4fc; }
+.muted, .stat p, .step p, .osbox span { color: #c5d5e7; }
+.lede, .intro { color: #ecf3fb; }
+.topnav .shell { gap: 8px; }
+.topnav a { color: #f1f6fb; font-size: 1rem; padding: 10px 14px; margin: 0; }
+.topnav a:hover, .topnav a:focus-visible { background: #fa9b55; color: #101722; border-color: #fa9b55; box-shadow: 0 0 0 2px rgba(250,155,85,.25); }
+a:focus-visible, button:focus-visible { outline: 3px solid #6bd3ee; outline-offset: 3px; }
+.tablewrap { max-width: 100%; }
+th, td { line-height: 1.6; }
+@media print { p, li, td, .muted, .stat p, .step p, .osbox span, .lede, .intro { color: #111 !important; } }
+  </style>
+ </head>
+ <body>
+  <header class="hero">
+   <div class="shell">
+    <div class="eyebrow">
+     Software Development &bull; Platform Guide
+    </div>
+    <h1>
+     Where Can Rust Applications Run?
+    </h1>
+    <p class="lede">
+     A practical guide to Windows, Apple macOS, Linux, mobile devices, and legacy systems&mdash;with a focus on distributing the applications you build, not just installing the Rust compiler.
+    </p>
+    <div class="chips">
+     <span class="chip">
+      Native executables
+     </span>
+     <span class="chip">
+      Cross-platform development
+     </span>
+     <span class="chip">
+      No Rust installation required for end users
+     </span>
+    </div>
+    <div class="actions">
+     <button class="btn" onclick="window.print()">
+      Print this Guide
+     </button>
+    </div>
+   </div>
+  </header>
+  <nav aria-label="Section navigation" class="topnav">
+   <div class="shell">
+    <a href="#fundamentals">
+     Overview
+    </a>
+    <a href="#windows">
+     Windows
+    </a>
+    <a href="#apple">
+     Apple
+    </a>
+    <a href="#linux">
+     Linux
+    </a>
+    <a href="#other">
+     Other platforms
+    </a>
+    <a href="#distribution">
+     Build targets
+    </a>
+    <a href="#architecture">
+     Architecture
+    </a>
+   </div>
+  </nav>
+  <main class="shell">
+   <section id="fundamentals">
+    <div class="kicker">
+     The essential distinction
+    </div>
+    <h2>
+     Running an app is different from compiling one
+    </h2>
+    <p class="intro">
+     Rust compiles source code into native machine code. People using your finished application normally do
+     <strong>
+      not
+     </strong>
+     need Rust, Cargo, or a Rust compiler installed. They do need an executable built for their operating system and processor, plus any libraries required by the application.
+    </p>
+    <div class="three">
+     <div class="stat">
+      <div class="big">
+       Windows
+      </div>
+      <p>
+       Compile a native
+       <strong>
+        .exe
+       </strong>
+       for supported Windows targets.
+      </p>
+     </div>
+     <div class="stat">
+      <div class="big">
+       macOS
+      </div>
+      <p>
+       Build executables for Intel or Apple Silicon, commonly packaged in a
+       <strong>
+        .app
+       </strong>
+       .
+      </p>
+     </div>
+     <div class="stat">
+      <div class="big">
+       Linux
+      </div>
+      <p>
+       Produce native ELF executables, possibly packaged for a distribution.
+      </p>
+     </div>
+    </div>
+    <div class="note">
+     <strong>
+      Not one universal binary:
+     </strong>
+     Most cross-platform Rust software uses one shared codebase but produces separate builds for Windows, macOS, Linux, and different CPU architectures.
+    </div>
+   </section>
+   <section id="windows">
+    <div class="kicker">
+     01 / Desktop systems
+    </div>
+    <h2>
+     Microsoft Windows
+    </h2>
+    <p>
+     Modern Rust's standard Windows compilation targets are intended for Windows 10 and newer. Older Windows editions may run Rust applications when built with specific legacy toolchains or specially configured targets; compatibility is not automatic.
+    </p>
+    <div class="tablewrap">
+     <table>
+      <thead>
+       <tr>
+        <th>
+         Windows edition
+        </th>
+        <th>
+         Running Rust applications
+        </th>
+        <th>
+         Practical guidance
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Windows 11
+        </td>
+        <td>
+         <span class="status yes">
+          Supported
+         </span>
+        </td>
+        <td>
+         Modern x64 and ARM64 builds.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Windows 10
+        </td>
+        <td>
+         <span class="status yes">
+          Supported
+         </span>
+        </td>
+        <td>
+         Standard modern Windows Rust builds; match CPU architecture.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Windows Server (modern releases)
+        </td>
+        <td>
+         <span class="status yes">
+          Supported
+         </span>
+        </td>
+        <td>
+         Check release, APIs, libraries, and intended architecture.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Windows 8 / 8.1
+        </td>
+        <td>
+         <span class="status limited">
+          Legacy / custom
+         </span>
+        </td>
+        <td>
+         Typically requires older toolchains and careful testing.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Windows 7
+        </td>
+        <td>
+         <span class="status limited">
+          Special build
+         </span>
+        </td>
+        <td>
+         Specialized 64-bit Windows 7 target or older compatible toolchain; not a standard Windows 10+ executable.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Windows Vista / XP
+        </td>
+        <td>
+         <span class="status limited">
+          Specialized only
+         </span>
+        </td>
+        <td>
+         Unsupported by normal modern targets; experimental/community legacy approaches may exist.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="small muted">
+     Rust 1.78 changed the minimum operating-system version for standard Windows targets to Windows 10. A Rust program's GUI framework and linked dependencies can raise that minimum further.
+    </p>
+   </section>
+   <section id="apple">
+    <div class="kicker">
+     02 / Desktop systems
+    </div>
+    <h2>
+     Apple Macintosh
+    </h2>
+    <div class="two">
+     <div class="panel">
+      <h3>
+       Intel-based Macs
+      </h3>
+      <p>
+       Use the
+       <span class="code">
+        x86_64-apple-darwin
+       </span>
+       target. Rust supports producing binaries for many older Intel Mac operating systems; the stated minimum for the standard target is macOS 10.12.
+      </p>
+     </div>
+     <div class="panel">
+      <h3>
+       Apple Silicon Macs
+      </h3>
+      <p>
+       Use
+       <span class="code">
+        aarch64-apple-darwin
+       </span>
+       for M-series Macs. The standard target starts at macOS 11, the first macOS release supporting Apple Silicon.
+      </p>
+     </div>
+    </div>
+    <div class="note">
+     A macOS application may combine Intel and Apple Silicon binaries in a
+     <strong>
+      Universal 2
+     </strong>
+     package. The GUI toolkit, third-party libraries, code signing, and app notarization can affect how you distribute the finished app.
+    </div>
+    <p class="muted small">
+     The operating system must itself support the Mac's hardware; an application cannot run on a macOS version that the computer cannot install.
+    </p>
+   </section>
+   <section id="linux">
+    <div class="kicker">
+     03 / Desktop &amp; server systems
+    </div>
+    <h2>
+     Linux and Unix-like systems
+    </h2>
+    <p>
+     Rust has strong support for mainstream Linux distributions and multiple CPU architectures. Compatibility with older systems depends on the Linux kernel, C library, and any dependencies you bundle or link dynamically.
+    </p>
+    <div class="tablewrap">
+     <table>
+      <thead>
+       <tr>
+        <th>
+         System
+        </th>
+        <th>
+         Support
+        </th>
+        <th>
+         Notes
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Ubuntu, Debian, Linux Mint
+        </td>
+        <td>
+         <span class="status yes">
+          Strong
+         </span>
+        </td>
+        <td>
+         Common desktop and server distributions.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Fedora, Arch Linux
+        </td>
+        <td>
+         <span class="status yes">
+          Strong
+         </span>
+        </td>
+        <td>
+         Modern desktop and developer environments.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Raspberry Pi OS
+        </td>
+        <td>
+         <span class="status yes">
+          Available
+         </span>
+        </td>
+        <td>
+         Use the ARM target matching Pi hardware and 32-/64-bit OS.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         FreeBSD
+        </td>
+        <td>
+         <span class="status yes">
+          Available
+         </span>
+        </td>
+        <td>
+         Native target support; verify exact tier and version.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         OpenBSD, NetBSD
+        </td>
+        <td>
+         <span class="status limited">
+          Target-dependent
+         </span>
+        </td>
+        <td>
+         Less universal testing and library compatibility.
+        </td>
+       </tr>
+       <tr>
+        <td>
+         ChromeOS
+        </td>
+        <td>
+         <span class="status limited">
+          Conditional
+         </span>
+        </td>
+        <td>
+         Via a compatible Linux environment or other supported runtime.
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="small muted">
+     For some common Linux GNU targets, documented operating-system baselines include Linux kernel 3.2 and glibc 2.17. That does not guarantee every third-party package works on those versions.
+    </p>
+   </section>
+   <section id="other">
+    <div class="kicker">
+     04 / Beyond the desktop
+    </div>
+    <h2>
+     Phones, browsers, and embedded devices
+    </h2>
+    <div class="three">
+     <div class="panel">
+      <h3>
+       iPhone &amp; iPad
+      </h3>
+      <p>
+       Rust can implement native application logic and libraries. Apple-specific app tooling and packaging are still necessary.
+      </p>
+     </div>
+     <div class="panel">
+      <h3>
+       Android
+      </h3>
+      <p>
+       Rust can compile native libraries and components for Android devices across supported CPU architectures.
+      </p>
+     </div>
+     <div class="panel">
+      <h3>
+       Web browsers
+      </h3>
+      <p>
+       Rust can compile to
+       <strong>
+        WebAssembly
+       </strong>
+       for browser-based functionality, typically with JavaScript or web UI integration.
+      </p>
+     </div>
+     <div class="panel">
+      <h3>
+       Raspberry Pi
+      </h3>
+      <p>
+       Build native Rust executables for Linux on compatible ARM systems.
+      </p>
+     </div>
+     <div class="panel">
+      <h3>
+       Embedded hardware
+      </h3>
+      <p>
+       Rust supports many microcontrollers and specialized processors, often without a conventional operating system.
+      </p>
+     </div>
+     <div class="panel">
+      <h3>
+       Servers
+      </h3>
+      <p>
+       Rust services run on compatible Windows and Linux server environments, including cloud and on-premises machines.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section id="distribution">
+    <div class="kicker">
+     05 / Application delivery
+    </div>
+    <h2>
+     Typical Rust compilation targets
+    </h2>
+    <p>
+     Consider a graphical application built from one shared Rust source tree. You would usually create these distinct builds:
+    </p>
+    <div class="tablewrap">
+     <table>
+      <thead>
+       <tr>
+        <th>
+         Destination
+        </th>
+        <th>
+         Rust target triple
+        </th>
+        <th>
+         Typical delivery
+        </th>
+       </tr>
+      </thead>
+      <tbody>
+       <tr>
+        <td>
+         Windows x64
+        </td>
+        <td>
+         <span class="code">
+          x86_64-pc-windows-msvc
+         </span>
+        </td>
+        <td>
+         .exe or installer
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Windows ARM64
+        </td>
+        <td>
+         <span class="code">
+          aarch64-pc-windows-msvc
+         </span>
+        </td>
+        <td>
+         .exe or installer
+        </td>
+       </tr>
+       <tr>
+        <td>
+         macOS Intel
+        </td>
+        <td>
+         <span class="code">
+          x86_64-apple-darwin
+         </span>
+        </td>
+        <td>
+         Executable or .app
+        </td>
+       </tr>
+       <tr>
+        <td>
+         macOS Apple Silicon
+        </td>
+        <td>
+         <span class="code">
+          aarch64-apple-darwin
+         </span>
+        </td>
+        <td>
+         Executable or .app
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Linux x64 (GNU)
+        </td>
+        <td>
+         <span class="code">
+          x86_64-unknown-linux-gnu
+         </span>
+        </td>
+        <td>
+         ELF binary / package
+        </td>
+       </tr>
+       <tr>
+        <td>
+         Linux ARM64 (GNU)
+        </td>
+        <td>
+         <span class="code">
+          aarch64-unknown-linux-gnu
+         </span>
+        </td>
+        <td>
+         ELF binary / package
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    </div>
+    <p class="small muted">
+     Cross-compiling from one computer is sometimes possible, but platform-specific SDKs, linkers, frameworks, code-signing, and testing can require separate build environments.
+    </p>
+   </section>
+   <section id="architecture">
+    <div class="kicker">
+     06 / Recommended design
+    </div>
+    <h2>
+     One application core, multiple platforms
+    </h2>
+    <p>
+     For a program such as
+     <strong>
+      MDA Knob Studio
+     </strong>
+     , keep image-processing logic, data structures, file handling, and export routines separate from the desktop interface and operating-system integrations.
+    </p>
+    <div aria-label="Shared Rust core connected to Windows, macOS and Linux application layers" class="arch" role="img">
+     <div class="core">
+      <h3>
+       Shared Rust application core
+      </h3>
+      <p>
+       Algorithms &middot; File processing &middot; Data models &middot; Export logic
+      </p>
+     </div>
+     <div aria-hidden="true" class="connector">
+     </div>
+     <div class="osgrid">
+      <div class="osbox">
+       <strong>
+        Windows
+       </strong>
+       <span>
+        Native GUI + .exe
+       </span>
+      </div>
+      <div class="osbox">
+       <strong>
+        macOS
+       </strong>
+       <span>
+        Native GUI + .app
+       </span>
+      </div>
+      <div class="osbox">
+       <strong>
+        Linux
+       </strong>
+       <span>
+        Desktop GUI + package
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="panel" style="margin-top:17px">
+     <h3>
+      Four compatibility checks before shipping
+     </h3>
+     <div class="step">
+      <span class="num">
+       1
+      </span>
+      <div>
+       <strong>
+        OS and minimum version
+       </strong>
+       <p>
+        Confirm the exact operating systems that your binaries and their dependencies can support.
+       </p>
+      </div>
+     </div>
+     <div class="step">
+      <span class="num">
+       2
+      </span>
+      <div>
+       <strong>
+        Processor architecture
+       </strong>
+       <p>
+        Match x86, x64, ARM64, or another CPU target.
+       </p>
+      </div>
+     </div>
+     <div class="step">
+      <span class="num">
+       3
+      </span>
+      <div>
+       <strong>
+        Native dependencies
+       </strong>
+       <p>
+        Check libraries, graphics APIs, runtimes, and GUI toolkit requirements.
+       </p>
+      </div>
+     </div>
+     <div class="step">
+      <span class="num">
+       4
+      </span>
+      <div>
+       <strong>
+        Real-device testing
+       </strong>
+       <p>
+        Test installers and application behavior on every minimum OS version you promise to support.
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section id="resources">
+    <div class="kicker">
+     Further reading
+    </div>
+    <h2>
+     Official technical references
+    </h2>
+    <ul class="source-list">
+     <li>
+      <a href="https://doc.rust-lang.org/rustc/platform-support.html" rel="noopener noreferrer" target="_blank">
+       Rust compiler platform support
+      </a>
+      &mdash; target triples, tiers, and minimum platform information.
+     </li>
+     <li>
+      <a href="https://blog.rust-lang.org/2024/05/02/Rust-1.78.0/" rel="noopener noreferrer" target="_blank">
+       Rust 1.78 release announcement
+      </a>
+      &mdash; Windows target baseline change.
+     </li>
+     <li>
+      <a href="https://rust-lang.github.io/rustup/" rel="noopener noreferrer" target="_blank">
+       Rustup documentation
+      </a>
+      &mdash; managing targets and toolchains.
+     </li>
+    </ul>
+    <p class="muted small">
+     Compatibility is a moving target. Confirm current requirements for the particular Rust release, target, GUI framework, and dependencies used by your project before publishing minimum-system requirements.
+    </p>
+   </section>
+  </main>
+  <footer class="footer">
+   <div class="shell">
+    Rust Application Platform Compatibility Guide &middot; Updated November 2026
+   </div>
+  </footer>
+ </body>
+</html>
+
