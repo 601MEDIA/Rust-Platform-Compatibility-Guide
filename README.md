@@ -19,12 +19,16 @@ The guide is intended for software developers, independent creators, and anyone 
 - Responsive HTML layout with interactive navigation
 - Print-friendly presentation
 
+<br>
 
 ![Watch Animato](https://601mediasolutions.com/cdn_601/rust-platform-guide-demo.gif)
+
+<br>
 
 [![601MEDIA](https://601mediasolutions.com/cdn_601/rust-platform-guide-demo_YT.png)](https://youtu.be/E4SEbkC7vlo)
 #### [Control Click to watch on YouTube](https://youtu.be/E4SEbkC7vlo)
 
+<br>
 
 ## How to Use
 
