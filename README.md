@@ -20,7 +20,7 @@ The guide is intended for software developers, independent creators, and anyone 
 - Print-friendly presentation
 
 
-[![Watch the video](https://img.youtube.com/vi/E4SEbkC7vlo/maxresdefault.jpg)](https://youtu.be/E4SEbkC7vlo?si=Wg_IpKwtvLLzlzHA)
+![Watch the video](https://601mediasolutions.com/cdn_601/rust-platform-guide-demo.gif)
 
 ### [Control Click to watch this video on YouTube](https://youtu.be/E4SEbkC7vlo?si=Wg_IpKwtvLLzlzHA)
 
