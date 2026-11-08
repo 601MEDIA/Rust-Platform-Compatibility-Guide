@@ -22,8 +22,8 @@ The guide is intended for software developers, independent creators, and anyone 
 
 ![Watch Animato](https://601mediasolutions.com/cdn_601/rust-platform-guide-demo.gif)
 
-![601MEDIA](https://601mediasolutions.com/cdn_601/rust-platform-guide-demo_YT.png)
-## [Control Click to watch this video on YouTube](https://youtu.be/E4SEbkC7vlo?si=Wg_IpKwtvLLzlzHA)
+[![601MEDIA](https://601mediasolutions.com/cdn_601/rust-platform-guide-demo_YT.png)](https://youtu.be/E4SEbkC7vlo?si=Wg_IpKwtvLLzlzHA)
+#### [Control Click to watch on YouTube](https://youtu.be/E4SEbkC7vlo?si=Wg_IpKwtvLLzlzHA)
 
 
 ## How to Use
