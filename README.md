@@ -19,6 +19,10 @@ The guide is intended for software developers, independent creators, and anyone 
 - Responsive HTML layout with interactive navigation
 - Print-friendly presentation
 
+[![Watch the video](https://img.youtube.com/vi/pcC4Dr6Wj2Q/maxresdefault.jpg)](https://youtu.be/pcC4Dr6Wj2Q)
+
+### [Watch this video on YouTube](https://youtu.be/pcC4Dr6Wj2Q)
+
 ## How to Use
 
 1. Download `rust-platform-compatibility-guide.html`.
